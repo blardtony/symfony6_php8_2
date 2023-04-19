@@ -14,19 +14,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id;
 
     #[ORM\Column(length: 180, unique: true)]
-    private ?string $email = null;
+    private ?string $email;
 
     #[ORM\Column]
-    private array $roles = [];
+    private array $roles;
 
     /**
      * @var string|null The hashed password
      */
     #[ORM\Column]
-    private ?string $password = null;
+    private ?string $password;
+
+    public function __construct()
+    {
+        $this->id = null;
+        $this->email = null;
+        $this->password = null;
+        $this->roles = [];
+    }
+
 
     public function getId(): ?int
     {
