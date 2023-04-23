@@ -32,6 +32,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private ?string $plainPassword;
 
+    #[ORM\Column]
+    private bool $verified;
+
     public function __construct()
     {
         $this->id = null;
@@ -39,6 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->password = null;
         $this->roles = [];
         $this->plainPassword = null;
+        $this->verified = false;
     }
 
 
@@ -120,6 +124,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPlainPassword(?string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->verified;
+    }
+
+    public function setVerified(bool $verified): self
+    {
+        $this->verified = $verified;
 
         return $this;
     }
